@@ -1,27 +1,22 @@
 import { useState, useEffect } from "react";
+import AlbumCard from "./AlbumCard";
 
 export default function AlbumList() {
-  const [albums, setAlbums] = useState();
-  useEffect(() => {
-    fetch("https://albums-api-jbl.web.app/albums")
-      .then((response) => response.json())
-      .then(setAlbums)
-      .catch(alert);
-  }, []);
-  return (
-    <main className='album-list'>
-      {!albums ? 
-        <p>Loading...</p>
-       : (
-        albums.map((thisAlbum) => (
-          <div className="album" key={thisAlbum.albumId}>
-            <h3>{thisAlbum.album}</h3>
-            <p>
-              {thisAlbum.year}, {thisAlbum.artist}
-            </p>
-          </div>
-        ))
-      )}
-    </main>
-  );
+    const [albums, setAlbums] = useState()
+    useEffect(() => {
+        fetch('https://albums-api-jbl.web.app/albums')
+        .then(response => response.json())
+        .then(setAlbums)
+        .catch(alert)
+
+    }, []) //run once when you first load....
+    return (
+        <main className="album-list">
+            {!albums
+                ? <p>Loading....</p>
+                : albums.map(thisAlbum => <AlbumCard key={thisAlbum.albumId} thisAlbum={thisAlbum} />)
+            }
+        </main>
+
+    )
 }
