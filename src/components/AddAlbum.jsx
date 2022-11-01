@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 
-export default function AddAlbum() {
+export default function AddAlbum({setToggle, toggle}) {
     const [album, setAlbum] = useState('')
     const [artist, setArtist] = useState('')
     const [year, setYear] = useState(2022)
@@ -22,6 +22,7 @@ fetch('https://albums-api-jbl.web.app/albums', {
     body: JSON.stringify(newAlbum)
 })
 .then(() => {
+    setToggle(!toggle)
     setAlbum('')
     setArtist('')
     setYear(2022)
